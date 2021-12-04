@@ -22,26 +22,5 @@ public:
         }
         return v;
         
-        
-        
-        // if((r*c) < (mat.size()*mat[0].size()))
-        //     return mat;
-        // vector<int> v;
-        // for(int i = 0; i<mat.size(); i++){
-        //     for(int j = 0; j<mat[i].size(); j++){
-        //         v.push_back(mat[i][j]);
-        //     }
-        // }
-        // auto it = v.begin();
-        // vector<vector<int>> nv;
-        // for(int i = 0; i<r && it!=v.end(); i++){
-        //     vector<int> temp;
-        //     for(int j = 0; j<c && it!=v.end(); j++){
-        //         temp.push_back(*it);
-        //         it++;
-        //     }
-        //     nv.push_back(temp);
-        // }
-        //  return nv;
     }
 };

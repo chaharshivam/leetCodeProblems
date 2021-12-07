@@ -13,30 +13,18 @@ public:
     ListNode* removeElements(ListNode* head, int val) {
         if(head == NULL)
             return NULL;
-        map<int,int> mp;
+        while(head->val == val){
+            head = head->next;
+            if(head == NULL)
+                return NULL;
+        }
         ListNode* temp = head;
-        int count = 0;
-        while(temp!=NULL){
-            if(temp->val != val){
-                mp[count++] = temp->val;
-            }
-            temp=temp->next;
+        while(temp->next!=NULL && temp!=NULL){
+            if(temp->next->val == val)
+                temp->next = temp->next->next;
+            else
+                temp=temp->next;
         }
-        auto it = mp.begin();
-        ListNode* newHead = NULL;
-        ListNode* tail = NULL;
-        while(it!=mp.end()){
-            ListNode* newNode = new ListNode((*it).second);
-            if(newHead == NULL){
-                newHead = newNode;
-                tail = newNode;
-            }
-            else{
-                tail->next = newNode;
-                tail = newNode;
-            }
-            it++;
-        }
-        return newHead;
+        return head;
     }
 };

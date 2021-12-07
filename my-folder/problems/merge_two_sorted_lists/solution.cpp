@@ -10,31 +10,49 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        vector<int> v;
-        while(l1 != NULL){
-            v.push_back(l1->val);
-            l1 = l1->next;
-        }
-        while(l2 != NULL){
-            v.push_back(l2->val);
-            l2 = l2->next;
-        }
-        sort(v.begin(), v.end());
-        ListNode* head = NULL;
-        ListNode* tail = NULL;
-        auto it = v.begin();
-        while(it!=v.end()){
-            ListNode* newNode = new ListNode(*it);
-            if(head == NULL){
-                head = newNode;
-                tail = newNode;
+    ListNode* mergeTwoLists(ListNode* headOne, ListNode* headTwo) {
+        ListNode* finalHead = NULL;
+    ListNode* finalTail = NULL;
+    if(headOne == NULL && headTwo == NULL)
+        return NULL;
+    if(headOne == NULL){
+        finalHead = headTwo;
+        return finalHead;
+    }
+    if(headTwo == NULL){
+        finalHead = headOne;
+        return finalHead;
+    }
+    while(headOne!=NULL && headTwo!=NULL){
+        if(finalHead == NULL){
+            if(headOne->val < headTwo->val){
+                finalHead = headOne;
+                finalTail = headOne;
+                headOne = headOne->next;
             }else{
-                tail->next = newNode;
-                tail = newNode;
+                finalHead = headTwo;
+                finalTail = headTwo;
+                headTwo = headTwo->next;
             }
-            it++;
         }
-        return head;
+        else{
+            if(headOne->val < headTwo->val){
+                finalTail->next = headOne;
+                finalTail=headOne;
+                headOne = headOne->next;
+            }else{
+                finalTail->next = headTwo;
+                finalTail = headTwo;
+                headTwo = headTwo->next;
+            }
+        }
+    }
+    if(headOne == NULL){
+        finalTail->next = headTwo;
+    }
+    if(headTwo == NULL){
+        finalTail->next = headOne;
+    }
+    return finalHead;
     }
 };

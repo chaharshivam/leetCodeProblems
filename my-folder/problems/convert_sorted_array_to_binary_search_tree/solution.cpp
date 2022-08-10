@@ -11,16 +11,18 @@
  */
 class Solution {
 public:
-    TreeNode* constructBST(vector<int>& v, int si, int ei){
-        if(si>ei)
+    TreeNode* constructBST(int start, int end, vector<int>& nums){
+        if(start > end){
             return NULL;
-        int mid = (si+ei)/2;
-        TreeNode* root = new TreeNode(v[mid]);
-        root->left = constructBST(v,si, mid-1);
-        root->right = constructBST(v, mid+1, ei);
+        }
+        int mid = (start + end)/2;
+        TreeNode* root = new TreeNode(nums.at(mid));
+        root->left = constructBST(start, mid - 1, nums);
+        root->right = constructBST(mid + 1, end, nums);
         return root;
+        
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        return constructBST(nums, 0, nums.size()-1);
+        return constructBST(0,nums.size()-1, nums);
     }
 };
